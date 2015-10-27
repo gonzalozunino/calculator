@@ -4,44 +4,57 @@
             <div class="cal-display">
                 <!-- Display is bound to scope variables in app.js -->
                 <p class="cal-results">
-                    {{output}}<br>
-                    {{operationToken}}
+                   {{output}}
                 </p>
             </div>
         </div>
         <div class="col-md-12">
             <div class="cal-buttons">
                 <div class="row">
-                    <button class="btn btn-danger" data-method="reset" data-key="8">C</button>
-                    <button class="btn" data-constant="BRO" data-key="40">(</button>
-                    <button class="btn" data-constant="BRC" data-key="41">)</button>
-                    <button class="btn btn-warning" data-constant="LOG" data-key="115">log</button>
+                    <button class="btn btn-danger" ng-click='clear()'>C</button>
+                    <button class="btn" ng-click='updateOutput("bro")'>(</button>
+                    <button class="btn" ng-click='updateOutput("brc")'>)</button>
+                    <button class="btn btn-warning" ng-click='updateOutput("log")'>log</button>
                 </div>
                 <div class="row">
-                    <button class="btn" data-key="55">7</button>
-                    <button class="btn" data-key="56">8</button>
-                    <button class="btn" data-key="57">9</button>
-                    <button class="btn btn-warning" data-constant="DIV" data-key="47">/</button>
+                    <button class="btn" ng-click='updateOutput(7)'>7</button>
+                    <button class="btn" ng-click='updateOutput(8)'>8</button>
+                    <button class="btn" ng-click='updateOutput(9)'>9</button>
+                    <button class="btn btn-warning" ng-click='updateOutput("div")'>/</button>
                 </div>
                 <div class="row">
-                    <button class="btn" data-key="52">4</button>
-                    <button class="btn" data-key="53">5</button>
-                    <button class="btn" data-key="54">6</button>
-                    <button class="btn btn-warning" data-constant="MULT" data-key="42">*</button>
+                    <button class="btn" ng-click='updateOutput(4)'>4</button>
+                    <button class="btn" ng-click='updateOutput(5)'>5</button>
+                    <button class="btn" ng-click='updateOutput(6)'>6</button>
+                    <button class="btn btn-warning" ng-click='updateOutput("mul")'>*</button>
                 </div>
                 <div class="row">
-                    <button class="btn" data-key="49">1</button>
-                    <button class="btn" data-key="50">2</button>
-                    <button class="btn" data-key="51">3</button>
-                    <button class="btn btn-warning" data-constant="MIN" data-key="45">-</button>
+                    <button class="btn" ng-click='updateOutput(1)'>1</button>
+                    <button class="btn" ng-click='updateOutput(2)'>2</button>
+                    <button class="btn" ng-click='updateOutput(3)'>3</button>
+                    <button class="btn btn-warning" ng-click='updateOutput("sub")'>-</button>
 
                 </div>
                 <div class="row">
-                    <button class="btn" data-key="48">0</button>
-                    <button class="btn" data-key="46">.</button>
-                    <button class="btn btn-primary" data-method="calculate" data-key="61">=</button>
-                    <button class="btn btn-warning" data-constant="SUM" data-key="43">+</button>
+                    <button class="btn" ng-click='updateOutput(0)'>0</button>
+                    <button class="btn" ng-click='updateOutput("point")'>.</button>
+                    <button class="btn btn-primary" ng-click='calculate()'>=</button>
+                    <button class="btn btn-warning" ng-click='updateOutput("add")'>+</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="main">
+                <h1>Sessions</h1>
+                <ul>
+                    <li ng-repeat="session in sessions">
+                        <p>{{ session.name }} <button ng-click="remove(session)">&times;</button></p>
+                    </li>
+                </ul>
+
+                <p>Total number of sessions: {{sessions.length}}</p>
             </div>
         </div>
     </div>
