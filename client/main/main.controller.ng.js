@@ -46,7 +46,7 @@ angular.module('calApp')
             function(data){
                 $scope.output = data;
                 $scope.newNumber = true;
-                
+
                 sessionToSave.name += ' = ' + $scope.output;
                 $scope.sessions.save(sessionToSave);
             },
@@ -54,19 +54,6 @@ angular.module('calApp')
                 $scope.output = "#ERROR!";
                 $scope.newNumber = true;
         });
-
-        /*MathHttpService.getInfo(url).then(function(info) {
-            $scope.output = info;
-            $scope.newNumber = true;
-
-            sessionToSave.name += ' = ' + $scope.output;
-            $scope.sessions.save(sessionToSave);
-
-        }, function(error) {
-            // promise rejected, could log the error with: console.log('error', error);
-            $scope.output = "#ERROR!";
-            $scope.newNumber = true;
-        });*/
     };
 
     $scope.clear = function() {
