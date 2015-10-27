@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('calApp')
-.controller('MainCtrl', function($scope, MathHttpService, $meteor) {
+.controller('MainCtrl', function($scope, $meteor) {
     // Collection init
     $scope.sessions = $scope.$meteorCollection(Sessions);
     $meteor.autorun($scope, function() {
@@ -41,7 +41,21 @@ angular.module('calApp')
     $scope.calculate = function() {
         var sessionToSave = {name: $scope.output};
         var url = '/v1/?expr=' + encodeURIComponent($scope.output);
-        MathHttpService.getInfo(url).then(function(info) {
+
+        $meteor.call('calculateMath', url).then(
+            function(data){
+                $scope.output = data;
+                $scope.newNumber = true;
+                
+                sessionToSave.name += ' = ' + $scope.output;
+                $scope.sessions.save(sessionToSave);
+            },
+            function(err){
+                $scope.output = "#ERROR!";
+                $scope.newNumber = true;
+        });
+
+        /*MathHttpService.getInfo(url).then(function(info) {
             $scope.output = info;
             $scope.newNumber = true;
 
@@ -52,7 +66,7 @@ angular.module('calApp')
             // promise rejected, could log the error with: console.log('error', error);
             $scope.output = "#ERROR!";
             $scope.newNumber = true;
-        });
+        });*/
     };
 
     $scope.clear = function() {
