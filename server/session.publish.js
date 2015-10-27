@@ -7,7 +7,7 @@ Meteor.methods({
             return result.content;
         } catch (e) {
             // Got a network error, time-out or HTTP error in the 400 or 500 range.
-            return e;
+            return "#ERROR!";
         }
     }
 });

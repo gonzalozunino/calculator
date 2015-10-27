@@ -17,9 +17,6 @@ angular.module('calApp')
 
     $scope.updateOutput = function(btn) {
         var operations = {
-            bro: '(',
-            brc: ')',
-            log: 'log',
             div: '/',
             mul: '*',
             sub: '-',
@@ -27,14 +24,20 @@ angular.module('calApp')
             add: '+'
         };
 
+        var additionalOps = {
+            bro: '(',
+            brc: ')',
+            log: 'log'
+        }
+
         if($scope.output == "0" || $scope.newNumber) {
             $scope.msg = "";
-            if (!operations[btn]) {
-                $scope.output =  btn;
+            if (!operations[btn] || additionalOps[btn]) {
+                $scope.output =  additionalOps[btn] || btn;
                 $scope.newNumber = false;
             }
         } else {
-            $scope.output += operations[btn] || String(btn);
+            $scope.output += additionalOps[btn] ||operations[btn] || String(btn);
         }
     };
 
